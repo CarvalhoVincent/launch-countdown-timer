@@ -217,32 +217,59 @@ select {
 
 .squares {
     width: 70px;
-    height: 71px;
+    height: 70px;
     background-color: hsl( var(--clr-desaturatedBlue) );
     border-radius: 4px;
-    -webkit-mask-image:
-     radial-gradient(circle at center left, transparent 0, transparent  4px, black 4px),
-     radial-gradient(circle at center right, transparent 0, transparent  4px, black 4px);
--webkit-mask-position: center left, center right;
--webkit-mask-repeat: no-repeat;
--webkit-mask-size: 50% 50%;
-mask-image:
-    radial-gradient(circle at center left, transparent 0, transparent 4px, black 4px),
-    radial-gradient(circle at center right, transparent 0, transparent 4px, black 4px);
-mask-position: center left, center right;
-mask-repeat: no-repeat;
-mask-size: 50% 50%;
+    position: relative;
+    --circle: radial-gradient(circle,hsl( var(--clr-darkBlue) ) 8vw, hsl( var(--clr-desaturatedBlue) ) 8.1vw);
 }
 
+.squares:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: var(--circle), var(--circle), var(--circle), var(--circle);
+    background-size: 5.5px 5.5px;
+    background-position: 0% 50%, 100% 50%;
+    background-repeat: no-repeat;
+  }
+
 .squareUp {
+    justify-content: center;
     width: 70px;
-    height: 33px;
+    height: 35px;
     background: #000000;
     mix-blend-mode: normal;
     opacity: 0.15;
     border-radius: 0px 0px 4px 4px;
-    transform: matrix(1, 0, 0, -1, 0, 0);
-    
+    transition: transform .5s linear;
+    z-index: 1000000;
+}
+
+.flipThis {
+    animation: flipthis 5s;
+}
+
+@keyframes flipthis {
+	0% {
+		transform: rotateX(0deg);
+	}
+	100% {
+		transform: rotateX(180deg);
+	}
+}
+
+.middleLine {
+    width: 70px;
+    height: .47px;
+    background-color: hsl( var(--clr-darkBlue) );
+}
+
+.numbers {
+    position: absolute;
+    justify-self: center;
+    z-index: 1000;
 }
 
 .social {
