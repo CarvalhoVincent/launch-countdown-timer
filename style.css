@@ -196,6 +196,13 @@ select {
     background-size: cover;
 }
 
+@media (min-width: 35em) {
+    .main {
+        background-position: initial;
+        background-size: contain;
+    }
+}
+
 .title {
     text-align: center;
     margin-top: 8.875rem;
@@ -207,6 +214,12 @@ select {
     margin-bottom: 10.1875rem;
     justify-content: center;
     gap: 1rem;
+}
+
+@media (min-width: 35em) {
+    .countdown {
+        gap: 2rem;
+    }
 }
 
 .columns {
@@ -222,6 +235,13 @@ select {
     border-radius: 4px;
     position: relative;
     --circle: radial-gradient(circle,hsl( var(--clr-darkBlue) ) 8vw, hsl( var(--clr-desaturatedBlue) ) 8.1vw);
+}
+
+@media (min-width: 35em) {
+    .squares {
+        width: 148px;
+        height: 150px;
+    }
 }
 
 .squares:before {
@@ -243,21 +263,15 @@ select {
     mix-blend-mode: normal;
     opacity: 0.15;
     border-radius: 0px 0px 4px 4px;
-    transition: transform .5s linear;
+    transition: transform 4s linear;
     z-index: 1000000;
 }
 
-.flipThis {
-    animation: flipthis 5s;
-}
-
-@keyframes flipthis {
-	0% {
-		transform: rotateX(0deg);
-	}
-	100% {
-		transform: rotateX(180deg);
-	}
+@media (min-width: 35em) {
+    .squareUp {
+        width: 148px;
+        height: 75px;
+    }
 }
 
 .middleLine {
@@ -266,10 +280,22 @@ select {
     background-color: hsl( var(--clr-darkBlue) );
 }
 
+@media (min-width: 35em) {
+    .middleLine {
+        width: 148px;
+    }
+}
+
 .numbers {
     position: absolute;
     justify-self: center;
     z-index: 1000;
+}
+
+@media (min-width: 35em) {
+    .numbers {
+        margin-top: 2.2rem;
+    }
 }
 
 .social {
