@@ -1,124 +1,54 @@
-const days = document.getElementById("daysNbr");
-const hours = document.getElementById("hoursNbr");
-const minutes = document.getElementById("minutesNbr");
-const seconds = document.getElementById("secondsNbr");
-const daysUp = document.getElementById("daysNbrUp");
-const hoursUp = document.getElementById("hoursNbrUp");
-const minutesUp = document.getElementById("minutesNbrUp");
-const secondsUp = document.getElementById("secondsNbrUp");
+const countToDate = new Date().setHours(new Date().getHours() + 96)
+let previousTimeBetweenDates
+setInterval(() => {
+  const currentDate = new Date()
+  const timeBetweenDates = Math.ceil((countToDate - currentDate) / 1000)
+  flipAllCards(timeBetweenDates)
 
-const squareUpDays = document.getElementById("squareUpDays");
-const squareUpHours = document.getElementById("squareUpHours");
-const squareUpMinutes = document.getElementById("squareUpMinutes");
-const squareUpSeconds = document.getElementById("squareUpSeconds");
+  previousTimeBetweenDates = timeBetweenDates
+}, 100)
 
-const interval = setInterval(countdown, 1000);
-function countdown() {
-    let secondsUpdate = seconds.innerHTML;
-    let secondsUpdateUp = secondsUp.innerHTML;
-    let minutesUpdate = minutes.innerHTML;
-    let minutesUpdateUp = minutesUp.innerHTML;
-    let hoursUpdate = hours.innerHTML;
-    let hoursUpdateUp = hoursUp.innerHTML;
-    let daysUpdate = days.innerHTML;
-    let daysUpdateUp = daysUp.innerHTML;
-    
-    secondsUpdate --;
-    secondsUpdateUp --;
-    seconds.classList.add("flipThis");
-     
-/* update countdown */
+function flipAllCards(time) {
+  const seconds = time % 60
+  const minutes = Math.floor(time / 60) % 60
+  const hours = Math.floor(time / 3600) % 24
+  const days = Math.floor(time / (3600*24))
 
-    
-    if(secondsUpdate < 10) {
-        seconds.innerHTML = "0" + secondsUpdate;
-    } else {
-        seconds.innerHTML = secondsUpdate;
-    }
+  flip(document.querySelector("[data-days]"), Math.floor(days / 10))
+  flip(document.querySelector("[data-hours]"), Math.floor(hours / 10))
+  flip(document.querySelector("[data-minutes]"), Math.floor(minutes / 10))
+  flip(document.querySelector("[data-seconds]"), Math.floor(seconds))
+  console.log(days, hours, minutes, seconds)
 
-    if(secondsUpdate < 0) {
-        seconds.innerHTML = "59";
-        minutesUpdate--;
+}
 
-        if(minutesUpdate < 10) {
-            minutes.innerHTML = "0" + minutesUpdate;
-        } else {
-            minutes.innerHTML = minutesUpdate;
-        }
-    }
+function flip(flipCard, newNumber) {
+  const topHalf = flipCard.querySelector(".top")
+  const startNumber = parseInt(topHalf.textContent)
+  if (newNumber === startNumber) return
 
-    if(minutesUpdate < 0) {
-        minutes.innerHTML = "59";
-        hoursUpdate--;
+  const bottomHalf = flipCard.querySelector(".bottom")
+  const topFlip = document.createElement("div")
+  topFlip.classList.add("top-flip")
+  const bottomFlip = document.createElement("div")
+  bottomFlip.classList.add("bottom-flip")
 
-        if(hoursUpdate < 10) {
-            hours.innerHTML = "0" + hoursUpdate;
-        } else {
-            hours.innerHTML = hoursUpdate;
-        }
-    
-        if(hoursUpdate < 0) {
-            hours.innerHTML = "23";
-            hoursUpdate--;
-        }
-    }
+  top.textContent = startNumber
+  bottomHalf.textContent = startNumber
+  topFlip.textContent = startNumber
+  bottomFlip.textContent = newNumber
 
-    if(hoursUpdate < 0) {
-        hours.innerHTML = "23";
-        daysUpdate--;
-
-        if(daysUpdate < 10) {
-            days.innerHTML = "0" + daysUpdate;
-        } else {
-            days.innerHTML = daysUpdate;
-        }
-    }
-
-/* update countdown UP */
-
-    if(secondsUpdateUp < 10) {
-        secondsUp.innerHTML = "0" + secondsUpdateUp;
-    } else {
-        secondsUp.innerHTML = secondsUpdateUp;
-    }
-
-    if(secondsUpdateUp < 0) {
-        secondsUp.innerHTML = "59";
-        minutesUpdateUp--;
-        
-        if(minutesUpdateUp < 10) {
-            minutesUp.innerHTML = "0" + minutesUpdateUp;
-        } else {
-            minutesUp.innerHTML = minutesUpdateUp;
-        }
-    }
-
-    if(minutesUpdateUp < 0) {
-        minutesUp.innerHTML = "59";
-        hoursUpdateUp--;
-
-        if(hoursUpdateUp < 10) {
-            hoursUp.innerHTML = "0" + hoursUpdateUp;
-        } else {
-            hoursUp.innerHTML = hoursUpdateUp;
-        }
-    
-        if(hoursUpdateUp < 0) {
-            hoursUp.innerHTML = "23";
-            hoursUpdateUp--;
-        }
-    }
-
-    if(hoursUpdateUp < 0) {
-        hoursUp.innerHTML = "23";
-        daysUpdateUp--;
-
-        if(daysUpdateUp < 10) {
-            daysUp.innerHTML = "0" + daysUpdateUp;
-        } else {
-            daysUp.innerHTML = daysUpdateUp;
-        }
-    }
+  topFlip.addEventListener("animationstart", e => {
+    topHalf.textContent = newNumber
+  })
+  topFlip.addEventListener("animationend", e => {
+    topFlip.remove()
+  })
+  bottomFlip.addEventListener("animationend", e => {
+    bottomHalf.textContent = newNumber
+    bottomFlip.remove()
+  })
+  flipCard.append(topFlip, bottomFlip)
 
 }
 

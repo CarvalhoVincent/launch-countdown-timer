@@ -17,7 +17,7 @@
     --fs-3: .4375rem;
 }
 
-@media (min-width: 35em) {
+@media (min-width: 45em) {
     :root {
         --fs-1: 5rem;
         --fs-2: 1.375rem;
@@ -162,7 +162,7 @@ select {
     letter-spacing: 2.96px;
 }
 
-@media (min-width: 35em) {
+@media (min-width: 45em) {
     .fs-1 { 
         letter-spacing: -2.4px;
     }
@@ -180,7 +180,6 @@ select {
 
 .attribution {
     font-size: 11px;
-    margin-bottom: 1rem;
     text-align: center;
 }
 
@@ -194,9 +193,12 @@ select {
     background-image: url(./images/bg-stars.svg);
     background-position: center;
     background-size: cover;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
 }
 
-@media (min-width: 35em) {
+@media (min-width: 45em) {
     .main {
         background-position: initial;
         background-size: contain;
@@ -216,7 +218,7 @@ select {
     gap: 1rem;
 }
 
-@media (min-width: 35em) {
+@media (min-width: 45em) {
     .countdown {
         gap: 2rem;
     }
@@ -228,85 +230,158 @@ select {
     gap: .7rem;
 }
 
-.squares {
+.flip-card {
     width: 70px;
     height: 70px;
     background-color: hsl( var(--clr-desaturatedBlue) );
-    border-radius: 4px;
     position: relative;
-    --circle: radial-gradient(circle,hsl( var(--clr-darkBlue) ) 8vw, hsl( var(--clr-desaturatedBlue) ) 8.1vw);
+    display: inline-flex;
+    flex-direction: column;
+    border-top-right-radius: .5em;
+    border-top-left-radius: .5em;
 }
 
-@media (min-width: 35em) {
-    .squares {
+.top {
+    justify-content: center;
+    width: 70px; 
+}
+
+.top,
+.bottom,
+.flip-card .top-flip,
+.flip-card .bottom-flip {
+    height: 35px;
+    line-height: 1;
+    padding: .5em .33em .5em .33em;
+    overflow: hidden;
+    font-size: var(--fs-1);
+    color: hsl( var(--clr-softRed) );
+}
+
+@media (min-width: 45em) {
+    .flip-card {
         width: 148px;
         height: 150px;
     }
-}
 
-.squares:before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: var(--circle), var(--circle), var(--circle), var(--circle);
-    background-size: 5.5px 5.5px;
-    background-position: 0% 50%, 100% 50%;
-    background-repeat: no-repeat;
-  }
-
-.squareUp {
-    justify-content: center;
-    width: 70px;
-    height: 35px;
-    background: #000000;
-    mix-blend-mode: normal;
-    opacity: 0.15;
-    border-radius: 0px 0px 4px 4px;
-    transition: transform 4s linear;
-    z-index: 1000000;
-}
-
-@media (min-width: 35em) {
-    .squareUp {
+    .top,
+    .bottom,
+    .flip-card .top-flip,
+    .flip-card .bottom-flip {
         width: 148px;
         height: 75px;
     }
 }
 
-.middleLine {
-    width: 70px;
-    height: .47px;
-    background-color: hsl( var(--clr-darkBlue) );
+.top,
+.flip-card .top-flip {
+    background-color: hsl(230, 22%, 21%);
+    border-top-right-radius: .1em;
+    border-top-left-radius: .1em;
+    border-bottom: .37px solid hsl( var(--clr-darkBlue) );
 }
 
-@media (min-width: 35em) {
-    .middleLine {
-        width: 148px;
-    }
+.bottom,
+.flip-card .bottom-flip {
+  background-color: hsl( var(--clr-desaturatedBlue) );
+  display: flex;
+  align-items: flex-end;
+  border-bottom-right-radius: .1em;
+  border-bottom-left-radius: .1em;
 }
 
-.numbers {
-    position: absolute;
-    justify-self: center;
-    z-index: 1000;
+.flip-card .top-flip {
+  position: absolute;
+  width: 100%;
+  animation: flip-top 250ms ease-in;
+  transform-origin: bottom;
 }
 
-@media (min-width: 35em) {
-    .numbers {
-        margin-top: 2.2rem;
-    }
+@keyframes flip-top {
+  100% {
+    transform: rotateX(90deg);
+  }
 }
 
-.social {
+.flip-card .bottom-flip {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  animation: flip-bottom 250ms ease-out 250ms;
+  transform-origin: top;
+  transform: rotateX(90deg);
+}
+
+@keyframes flip-bottom {
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer {
     background-image: url(./images/pattern-hills.svg);
     background-repeat: no-repeat;
     background-position: 80%;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 3rem;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 1rem;
     gap: 2rem;
     height: 168px;
+}
+
+.social {
+    gap: 2rem;
+}
+
+@media (min-width: 45em) {
+    .footer {
+        background-position: initial;
+        background-size: cover;
+    }
 }
 
 .icons:hover .icon{
