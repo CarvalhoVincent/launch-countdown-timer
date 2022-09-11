@@ -1,4 +1,4 @@
-const countToDate = new Date().setHours(new Date().getHours() + 96)
+const countToDate = new Date().setHours(new Date().getHours() + 306)
 let previousTimeBetweenDates
 setInterval(() => {
   const currentDate = new Date()
@@ -14,11 +14,11 @@ function flipAllCards(time) {
   const hours = Math.floor(time / 3600) % 24
   const days = Math.floor(time / (3600*24))
 
-  flip(document.querySelector("[data-days]"), Math.floor(days / 10))
-  flip(document.querySelector("[data-hours]"), Math.floor(hours / 10))
-  flip(document.querySelector("[data-minutes]"), Math.floor(minutes / 10))
-  flip(document.querySelector("[data-seconds]"), Math.floor(seconds))
-  console.log(days, hours, minutes, seconds)
+    flip(document.querySelector("[data-days]"), days)
+    flip(document.querySelector("[data-hours]"), Math.floor(hours))
+    flip(document.querySelector("[data-minutes]"), Math.floor(minutes))
+    flip(document.querySelector("[data-seconds]"), Math.floor(seconds))
+    console.log(days, hours, minutes, seconds)
 
 }
 
